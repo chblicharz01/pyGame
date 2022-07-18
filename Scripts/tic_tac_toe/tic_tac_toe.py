@@ -48,6 +48,11 @@ while winning_token == '' and tokens_placed < 9:
 
         if row or col or diag:
             winning_token = current_token
+
+        if current_token == 'X':
+            current_token = 'O'
+        else:
+            current_token = 'X'
 if winning_token != 'X' and winning_token != 'O':
     print("\nThe game is a tie! ")
 else:
