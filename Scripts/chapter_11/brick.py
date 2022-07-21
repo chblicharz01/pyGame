@@ -51,8 +51,34 @@ while True:
                 batRect.topleft = (mousex, playerY)
             else:
                 batRect.topleft = (800 - 55, playerY)
-        #main game logic
-        #collision detection
-        pygame.display.update()
-        fpsClock.tick(30)
+
+    #main game logic
+    bx += sx
+    by += sy
+    ballRect.topleft = (bx ,by)
+
+    #y movement
+    if (by < 0):
+        by = 0
+        sy *= -1
+
+    if (by >= 600 - 8):
+        by = 600-8
+        sy *= -1
+
+    #x movement
+    if (bx <= 0 ):
+        bx = 0
+        sx *= -1
+
+    if (bx >= 800 - 8):
+        bx = 800 - 8
+        sx *= -1
+
+    #collision detection
+    if ballRect.colliderect(batRect):
+        by = playerY-8
+        sy *= -1
+    pygame.display.update()
+    fpsClock.tick(30)
 
