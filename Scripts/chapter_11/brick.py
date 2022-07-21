@@ -30,6 +30,16 @@ sx, sy = (ballSpeed, ballSpeed)
 ballRect.topleft = (bx,by)
 
 #brick init
+brick = pygame.image.load('brick.png')
+bricks = []
+for y in range(5):
+    brickY = (y * 24) + 100
+    for x in range(10):
+        brickX = (31 * x) + 245
+        width = brick.get_width()
+        height = brick.get_height()
+        rect = Rect(brickX, brickY, width, height)
+        bricks.append(rect)
 
 while True:
     mainSurface.fill(black)
@@ -37,9 +47,12 @@ while True:
     #draw bat
     mainSurface.blit(bat, batRect)
 
-    #brick draw
+    #draw ball
     mainSurface.blit(ball,ballRect)
 
+    #draw brick
+    for b in bricks:
+        mainSurface.blit(brick,b)
     #events
     for event in pygame.event.get():
         if event.type == QUIT:
@@ -51,11 +64,14 @@ while True:
                 batRect.topleft = (mousex, playerY)
             else:
                 batRect.topleft = (800 - 55, playerY)
+        elif event.type == MOUSEBUTTONUP and not ballServed:
+            ballServed = True
 
     #main game logic
-    bx += sx
-    by += sy
-    ballRect.topleft = (bx ,by)
+    if ballServed:
+        bx += sx
+        by += sy
+        ballRect.topleft = (bx ,by)
 
     #y movement
     if (by < 0):
@@ -63,8 +79,11 @@ while True:
         sy *= -1
 
     if (by >= 600 - 8):
-        by = 600-8
-        sy *= -1
+        ballServed = False
+        bx, by = (24, ballStartY)
+        ballSpeed = 3
+        sx, sy = (ballSpeed, ballSpeed)
+        ballRect.topleft = (bx , by)
 
     #x movement
     if (bx <= 0 ):
@@ -79,6 +98,18 @@ while True:
     if ballRect.colliderect(batRect):
         by = playerY-8
         sy *= -1
+
+    brick_hit_index = ballRect.collidelist(bricks)
+    if brick_hit_index >= 0:
+        hb = bricks[brick_hit_index]
+        mx = bx + 4
+        my = by + 4
+        if mx > hb.x + hb.width or mx < hb.x:
+            sx *= -1
+        else:
+            sy *= -1
+        del (bricks[brick_hit_index])
+
     pygame.display.update()
     fpsClock.tick(30)
 
