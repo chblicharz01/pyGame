@@ -2,9 +2,11 @@ class Dog(object):
     def makeNoise(self):
         print("woof...")
 
+
 class Duck(object):
     def makeNoise(self):
         print("quack...")
+
 
 animals = [Dog(), Duck()]
 
