@@ -1,33 +1,4 @@
 class Alien(object):
-    def __init__(self):
-        self.x = 0
-        self.y = 0
-
-    def update(self):
-        self.x = self.x + 5
-
-    def draw(self):
-        print("%d, %d" % (self.x, self.y))
-
-
-# sample implementation
-alien1 = Alien()
-alien1.update()
-alien1.draw()
-
-
-class Strafe(object):
-    def update(self, obj):
-        obj.x = obj.x + 5
-
-
-class Diagonal(object):
-    def update(self, obj):
-        obj.x = obj.x + 5
-        obj.y = obj.y + 5
-
-
-class Alien(object):
     def __init__(self, movement):
         self.x = 0
         self.y = 0
