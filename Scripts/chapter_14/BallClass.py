@@ -32,3 +32,10 @@ if __name__ == '__main__':
             surface.fill((0,0,0))
             ball.draw(fpsClock, surface)
 
+            pygame.display.update()
+            fpsClock.tick(30)
+        def update(self, gameTime):
+            sx = self.speed[0]
+            sy = self.speed[1]
+            
+
