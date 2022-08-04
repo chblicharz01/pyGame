@@ -4,20 +4,23 @@ written by Chris Blicharz
 8-1-2022
 '''
 
-#importations
+# importations
 import pygame, os, sys
 import random
 from pygame.locals import *
 
 pygame.init()
 fpsClock = pygame.time.Clock()
-surface = pygame.display.set_mode((640,480))
+surface = pygame.display.set_mode((640, 480))
 font = pygame.font.Font(None, 32)
 
+
 class Position:
-    def __init__(self, x,y):
+    def __init__(self, x, y):
         self.x = x
         self.y = y
+
+
 class GameData:
     def __init__(self):
         self.lives = 3
@@ -31,10 +34,53 @@ class GameData:
         self.frame - 0
 
         bx = random.randint(1, 38)
-        by = random.randint(1 , 28)
+        by = random.randint(1, 28)
 
         self.berry = Position(bx, by)
-        self.blocks.append(Position(20,15))
-        self.blocks.append(Position(19,15))
+        self.blocks.append(Position(20, 15))
+        self.blocks.append(Position(19, 15))
+        self.direction = 0
 
 
+def loseLife(gameData):
+    pass
+
+
+def positionBerry(gameData):
+    pass
+
+
+def loadMapFile(fileName):
+    return None
+
+
+def headHitBody(gameDate):
+    return False
+
+
+def headHitWall(map, gameData):
+    return False
+
+
+def drawData(surface, gamedata):
+    pass
+
+
+def drawGameOver(surface):
+    pass
+
+
+def drawWalls(surface, img, map):
+    pass
+
+
+def drawSnake(surface, img, gameData):
+    pass
+
+
+def updateGame(gameData, gameTime):
+    pass
+
+
+def loadImages():
+    return {}
