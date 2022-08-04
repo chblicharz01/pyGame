@@ -31,7 +31,7 @@ class GameData:
         self.level = 1
         self.berrycount = 0
         self.segments = 1
-        self.frame - 0
+        self.frame = 0
 
         bx = random.randint(1, 38)
         by = random.randint(1, 28)
@@ -83,4 +83,46 @@ def updateGame(gameData, gameTime):
 
 
 def loadImages():
-    return {}
+    wall = pygame.image.load('wall.png')
+    raspberry = pygame.image.load('berry.png')
+    snake = pygame.image.load('snake.png')
+    return {'wall':wall,'berry':raspberry,'snake':snake}
+
+
+images = loadImages()
+images['berry'].set_colorkey((255, 0, 255))
+
+snakemap = loadMapFile('map.txt')
+data = GameData()
+
+quitGame = False
+isPlaying = False
+
+# main game logic
+while not quitGame:
+    for event in pygame.event.get():
+        if event.type == QUIT:
+            pygame.quit()
+            sys.exit()
+
+    if isPlaying:
+        x = random.randint(1, 38)
+        y = random.randint(1, 28)
+
+        rrect = images['berry'].get_rect()
+        rrect.left = data.berry.x * 16
+        rrect.top = data.berry.y * 16
+
+        # Game update code here
+
+        isPlaying = (data.lives > 0)
+        if isPlaying:
+            surface.fill((0, 0, 0))
+            # drawing code will go here
+
+    else:
+        keys = pygame.key.get_pressed()
+        if keys[K_SPACE]:
+            isPlaying = True
+            data = None
+            data = GameData()
